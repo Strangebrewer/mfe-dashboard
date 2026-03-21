@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
 
-const APP_NAME = 'mfe_app_one';
+const APP_NAME = 'mfe_dashboard';
 
 const config: Configuration = {
   mode: 'development',
