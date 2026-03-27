@@ -11,3 +11,4 @@ coverage/
 .next
 .jest-cache
 harness
+NOTES.md

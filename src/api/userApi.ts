@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import BaseApi from './baseApi.js';
+import BaseApi from './baseApi';
 
 class UserApi extends BaseApi {
   constructor() {
