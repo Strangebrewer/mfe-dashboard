@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { billApi } from '../api';
 
-export const useGetBills = () => {
+export const useGetBills = (month: string) => {
   return useQuery({
     queryKey: ['get-bills'],
     queryFn: async () => {
-      const { data = [] } = await billApi.get();
+      const { data = [] } = await billApi.get({ month });
       return data;
     },
   });

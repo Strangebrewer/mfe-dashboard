@@ -4,7 +4,7 @@ import { useGetBills } from "../hooks/billHooks";
 
 const Bills: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: bills } = useGetBills();
+  const { data: bills } = useGetBills('2026-03');
 
   return (
     <div>
@@ -12,7 +12,6 @@ const Bills: FC = () => {
       <button onClick={() => setIsOpen(true)}>new Bill!</button>
       <h2>Bills</h2>
       {bills?.length ? bills.map((b: any) => {
-        console.log('bill:::', b);
         return (
           <div key={b.id}>
             <p>name: {b.name}</p>
