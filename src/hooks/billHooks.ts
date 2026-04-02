@@ -22,3 +22,18 @@ export const useCreateBill = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-bills'] }),
   });
 };
+
+export const usePayBill = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: Record<string, any>) => {
+      const { billId, ...rest } = data;
+      const response = await billApi.payBill(billId, rest);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-bills'] });
+      queryClient.invalidateQueries({ queryKey: ['get-transactions'] });
+    },
+  });
+};

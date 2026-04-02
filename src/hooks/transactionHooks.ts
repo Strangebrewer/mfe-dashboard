@@ -22,3 +22,33 @@ export const useCreateTransaction = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-transactions'] }),
   });
 };
+
+export const useDeleteTransaction = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ['delete-transaction'],
+    mutationFn: async (id: string) => {
+      const response = await transactionApi.delete(id);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['get-bills'] });
+    },
+  });
+};
+
+export const useUpdateTransaction = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ['update-transaction'],
+    mutationFn: async (transaction: any) => {
+      const response = await transactionApi.update(transaction);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['get-bills'] });
+    },
+  });
+};
