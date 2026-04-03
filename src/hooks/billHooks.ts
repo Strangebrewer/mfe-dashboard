@@ -3,7 +3,7 @@ import { billApi } from '../api';
 
 export const useGetBills = (month: string) => {
   return useQuery({
-    queryKey: ['get-bills'],
+    queryKey: ['get-bills', month],
     queryFn: async () => {
       const { data = [] } = await billApi.get({ month });
       return data;

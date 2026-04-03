@@ -11,9 +11,7 @@ const Bills: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { billMonth, month, year } = useBillMonthStore();
   const cellRefs = useRef<Array<Array<HTMLInputElement | null>>>([]);
-
   const { data: bills } = useGetBills(billMonth);
-  console.log('bills:::', bills);
 
   function registerRef(rowIndex: number, colIndex: number, el: HTMLInputElement | null) {
     if (!cellRefs.current[rowIndex]) {

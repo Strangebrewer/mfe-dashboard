@@ -18,7 +18,7 @@ const BillRow: FC<BillRowProps> = ({ bill, rowIndex, month, year, registerRef, o
   const { mutate: payBill } = usePayBill();
   const { mutate: updateTransaction } = useUpdateTransaction();
   const { mutate: deleteTransaction } = useDeleteTransaction();
-  const enterFired = useRef(false);
+  const wasEnterFired = useRef(false);
 
   function getTransactionForColumn(colIndex: number) {
     return transactions.find(t => t.billMonth === getBillMonthForColumn(month, year, colIndex));
@@ -47,15 +47,16 @@ const BillRow: FC<BillRowProps> = ({ bill, rowIndex, month, year, registerRef, o
   }
 
   function save(colIndex: number) {
-    const raw = values[colIndex].trim();
+    const existing = values[colIndex].trim();
     const transaction = getTransactionForColumn(colIndex);
 
-    if (!raw) {
+    // if no value in the cell, but transaction exists, delete the transaction
+    if (!existing) {
       if (transaction) deleteTransaction(transaction.id);
       return;
     }
 
-    const amount = toStoredAmount(raw);
+    const amount = toStoredAmount(existing);
 
     if (transaction) {
       const original = toStoredAmount(toDisplayAmount(transaction.amount));
@@ -74,15 +75,15 @@ const BillRow: FC<BillRowProps> = ({ bill, rowIndex, month, year, registerRef, o
 
   function handleKeyDown(colIndex: number, e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
-      enterFired.current = true;
+      wasEnterFired.current = true;
       save(colIndex);
       onEnter(rowIndex, colIndex);
     }
   }
 
   function handleBlur(colIndex: number) {
-    if (enterFired.current) {
-      enterFired.current = false;
+    if (wasEnterFired.current) {
+      wasEnterFired.current = false;
       return;
     }
     save(colIndex);
