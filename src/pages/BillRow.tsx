@@ -91,7 +91,7 @@ const BillRow: FC<BillRowProps> = ({ bill, rowIndex, month, year, registerRef, o
 
   return (
     <div className="tw:w-[850px] tw:flex">
-      <div className="tw:w-[300px] tw:border">{bill.name}</div>
+      <div className="tw:w-[300px] tw:border tw:pl-[4px]">{bill.name}</div>
       {[0, 1, 2].map(colIndex => (
         <input
           key={colIndex}

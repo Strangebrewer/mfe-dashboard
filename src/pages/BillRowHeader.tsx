@@ -20,7 +20,7 @@ const BillRowHeader = () => {
 
   return (
     <div className="tw:w-[850px] tw:flex">
-      <div className="tw:w-[300px]">Name</div>
+      <div className="tw:w-[300px] tw:pl-[4px]">Name</div>
 
       <div className="tw:w-[80px] tw:text-center tw:relative">
         <span className="tw:absolute tw:left-0">
